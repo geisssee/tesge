@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Amor Por Patas</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f0f8f0;
+    }
+
+    header {
+      background-color: #6BBE44;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 20px;
+      flex-wrap: wrap;
+    }
+
+    /*NAVEGAÇÃO*/
+
+    .logo-area {
+      display: flex;
+      align-items: center;
+    }
+
+    .logo-area img {
+      width: 60px;
+      margin-right: 10px;
+    }
+
+    .titulo-site h1 {
+      font-size: 1.5em;
+    }
+
+    .titulo-site p {
+      font-size: 0.9em;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 15px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: #086b05;
+    }
+
+    /*MENU*/
+
+    .menu-icon {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      margin-left: 20px;
+    }
+
+    .menu-icon div {
+      width: 25px;
+      height: 3px;
+      background-color: white;
+      margin: 4px 0;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        right: 20px;
+        background-color: #6BBE44;
+        padding: 10px;
+        border-radius: 8px;
+      }
+
+      .nav-links.active {
+        display: flex;
+      }
+
+      .menu-icon {
+        display: flex;
+      }
+    }
+
+    .carousel {
+      position: relative;
+      width: 100%;
+      max-width: 100%;
+      overflow: hidden;
+      margin-bottom: 30px;
+    }
+
+    input[type="radio"] {
+      display: none;
+    }
+
+    /*SLIDE*/
+
+    .slides {
+      display: flex;
+      width: 400%;
+      transition: margin-left 0.5s ease-in-out;
+    }
+
+    .slides img {
+      width: 100%;
+      height: 550px;
+      object-fit: cover;
+    }
+
+
+
+    .dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .dot {
+      height: 15px;
+      width: 15px;
+      margin: 5px 8px;
+      background-color: #bbb;
+      border-radius: 50%;
+      display: inline-block;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #slide1:checked ~ .slides { 
+      margin-left: 0; }
+    #slide2:checked ~ .slides { 
+      margin-left: -100%; }
+    #slide3:checked ~ .slides { 
+      margin-left: -200%; }
+    #slide4:checked ~ .slides { 
+      margin-left: -300%; }
+
+    #slide1:checked ~ .dots label[for="slide1"],
+    #slide2:checked ~ .dots label[for="slide2"],
+    #slide3:checked ~ .dots label[for="slide3"],
+    #slide4:checked ~ .dots label[for="slide4"] {
+      background-color: #6BBE44;
+    }
+
+    section {
+      padding: 20px;
+      text-align: center;
+    }
+
+    /*CARD*/
+
+    .card-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .card {
+      width: 220px;
+      min-height: 330px;
+      background: white;
+      border-radius: 10px;
+      box-shadow: 0 0 5px #999;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .preco-antigo {
+      text-decoration: line-through;
+      color: red;
+    }
+
+    .preco-novo {
+      color: green;
+      font-weight: bold;
+    }
+
+    .btn-comprar {
+      background-color: #6BBE44;
+      color: white;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 10px;
+      cursor: pointer;
+    }
+
+    .btn-comprar:active {
+      transform: scale(0.95);
+    }
+
+    /*RODAPE*/
+
+    footer {
+      background-color: #6BBE44;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .icons img {
+      width: 30px;
+      margin: 5px;
+    }
+
+    /*SOBRE NÓS*/
+
+    #sobre {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 30px;
+      text-align: left;
+      padding: 20px;
+    }
+
+    #sobre img {
+      width: 300px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .sobre-texto {
+      max-width: 600px;
+    }
+  </style>
+</head>
+<body>
+
+  <!--BARRA DE NAVEGAÇÃO-->
+  <header>
+    <div class="logo-area">
+      <img src="img/AMOR POR PATAS.png" alt="Logo Amor por Patas">
+      <div class="titulo-site">
+        <h1>PetShope: Amor Por Patas</h1>
+        <p>Seu pet com mais amor e cuidado!</p>
+      </div>
+    </div>
+    <nav>
+      <div class="menu-icon" onclick="toggleMenu()">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+      <div class="nav-links" id="navLinks">
+        <a href="#sobre">Sobre Nós</a>
+        <a href="#produtos">Produtos</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#comunidade">Comunidade</a>
+        <a href="#contato">Contato</a>
+      </div>
+    </nav>
+  </header>
+
+  <!--CAROUSEL-->
+
+  <div class="carousel">
+    <input type="radio" name="carousel" id="slide1" checked>
+    <input type="radio" name="carousel" id="slide2">
+    <input type="radio" name="carousel" id="slide3">
+    <input type="radio" name="carousel" id="slide4">
+
+    <div class="slides">
+      <img src="img/carousel2.png" alt="Imagem 1">
+      <img src="img/carousel1.png" alt="Imagem 2">
+      <img src="img/carousel3.png" alt="Imagem 3">
+      <img src="img/carousel4.png" alt="Imagem 4">
+    </div>
+
+    <div class="dots">
+      <label for="slide1" class="dot"></label>
+      <label for="slide2" class="dot"></label>
+      <label for="slide3" class="dot"></label>
+      <label for="slide4" class="dot"></label>
+    </div>
+  </div>
+
+  <!--SOBRE NÓS-->
+
+  <section id="sobre">
+    <img src="img/AMOR POR PATAS.png" alt="Amor pelos animais">
+    <div class="sobre-texto">
+      <h2>Sobre Nós</h2><br>
+      <p>
+        No Amor Por Patas, nosso compromisso vai além de oferecer produtos nós cuidamos 
+        com amor de quem mais precisa: os animais. Somos apaixonados por pets e acreditamos
+        que todo bichinho merece um lar cheio de carinho, segurança e respeito.
+      </p>
+      
+      <p>
+        Por isso, promovemos e apoiamos a adoção responsável, conectando animais resgatados 
+        a famílias amorosas. Aqui, cada adoção é feita com responsabilidade, 
+        orientação e muito afeto, porque acreditamos que adotar é um ato de amor consciente.
+      </p>
+
+      <p>
+        Além disso, nosso pet shop é completo: oferecemos uma ampla variedade de produtos 
+        e acessórios, desde rações de qualidade, brinquedos, roupinhas, até itens de higiene 
+        e bem-estar. Tudo escolhido com cuidado para garantir a saúde e felicidade do seu melhor amigo.
+      </p>
+
+      <p>
+        Seja para adotar, cuidar ou mimar seu pet, conte com a gente!
+        Aqui, o amor pelos animais fala mais alto. 
+      </p>
+    </div><br>
+  </section>
+
+  <!--PRODUTOS-->
+
+  <section id="produtos">
+    <h2>Produtos</h2><br>
+
+    <h3>Rações</h3><br>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="img/racao1.jpg">
+        <p>Ração Premium</p>
+        <p class="preco-antigo">R$ 129,90</p>
+        <p class="preco-novo">R$ 99,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/racao2.jpeg">
+        <p>Ração Premium</p>
+        <p class="preco-antigo">R$ 100,00</p>
+        <p class="preco-novo">R$ 59,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/racao3.jpeg">
+        <p>Ração Alpo</p>
+        <p class="preco-antigo">R$ 100,00</p>
+        <p class="preco-novo">R$ 59,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/racao4.webp">
+        <p>Ração DogBrasil</p>
+        <p class="preco-antigo">R$ 100,00</p>
+        <p class="preco-novo">R$ 59,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div><br>
+
+    <!--BRINQUEDOS-->
+
+    <h3>Brinquedos</h3><br>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="img/brinquedo1.jpg">
+        <p>Brinquedo Spike Macaco de Pelúcia para Cães</p>
+        <p class="preco-novo">R$ 49,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/brinquedo2.jpg">
+        <p>Brinquedo Interativo</p>
+        <p class="preco-antigo">R$ 59,00</p>
+        <p class="preco-novo">R$ 29,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/brinquedo3.jpg">
+        <p>Labirinto Verde Água</p>
+        <p class="preco-novo">R$ 27,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/brinquedo4.jpg">
+        <p>Tunel Pet</p>
+        <p class="preco-antigo">R$ 99,00</p>
+        <p class="preco-novo">R$ 59,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div><br>
+
+    <!--ROUPAS-->
+
+    <h3>Roupas</h3><br>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="img/roupa1.jpg">
+        <p>Moletom 100% algodão </p>
+        <p class="preco-antigo">R$ 150,00</p>
+        <p class="preco-novo">R$ 79,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/roupa2.jpg">
+        <p>Moletom </p>
+        <p class="preco-novo">R$ 179,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/roupa3.webp">
+        <p>sueter</p>
+        <p class="preco-antigo">R$ 150,00</p>
+        <p class="preco-novo">R$ 79,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/roupa4.jpg">
+        <p>sueter de trico</p>
+        <p class="preco-novo">R$ 179,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+    </div><br>
+
+    <!--DIVERSOS-->
+
+    <h3>Diversos</h3><br>
+
+    <div class="card-container">
+      <div class="card">
+        <img src="img/casa1.webp">
+        <p>Casinha de Cachorro</p>
+        <p class="preco-novo">R$ 199,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/casa2.jpg">
+        <p>Casinha de Gato</p>
+        <p class="preco-antigo">R$ 120,00</p>
+        <p class="preco-novo">R$ 69,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/diverso3.jpg">
+        <p>Mochila Cães e Gatos</p>
+        <p class="preco-novo">R$ 199,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/diverso4.jpg">
+        <p>Coleira/p>
+        <p class="preco-antigo">R$ 120,00</p>
+        <p class="preco-novo">R$ 69,90</p>
+        <button class="btn-comprar">Comprar</button>
+      </div>
+    </div>
+  </section><br>
+
+  <!--SERVIÇOS-->
+
+  <section id="servicos">
+    <h2>Serviços</h2><br>
+    
+    <div class="card-container">
+      <div class="card">
+        <img src="img/banho.jpg">
+        <p>Banho</p>
+        <button class="btn-comprar">Agendar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/tosa.jpeg">
+        <p>Tosa</p>
+        <button class="btn-comprar">Agendar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/petdrive.png">
+        <p>Táxi Pet</p>
+        <button class="btn-comprar">Chamar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/consulta.webp">
+        <p>Consulta Veterinária</p>
+        <button class="btn-comprar">Agendar</button>
+      </div>
+
+      <div class="card">
+        <img src="img/adocao.jpeg">
+        <p>Adoção Respeitável</p>
+        <button class="btn-comprar">ADOTAR</button>
+      </div>
+
+    </div>
+  </section><br>
+
+  <!--COMUNIDADE-->
+
+  <section id="comunidade">
+    <h2>Comunidade</h2><br>
+    <p>Veja histórias emocionantes de adoção e o impacto do nosso trabalho junto aos animais.</p><br>
+    <div class="card-container">
+      <div class="card">
+        <img src="img/comun01.jpg">
+        <p>Totó adotado com amor</p>
+      </div>
+
+      <div class="card">
+        <img src="img/comun02.jpg">
+        <p>Nova família para a Lua</p>
+      </div>
+      
+      <div class="card">
+        <img src="img/comun03.jpg">
+        <p>Meu nome mudou, minha vida também.</p>
+      </div>
+      
+      <div class="card">
+        <img src="img/comun04.avif">
+        <p>Do abandono ao afeto!</p>
+      </div>
+      <div class="card">
+        <img src="img/comun05.jfif">
+        <p>Você não pode comprar amor, mas pode adotá-lo!</p>
+      </div>
+
+      <div class="card">
+        <img src="img/comun06.jpeg">
+        <p>Agora sou amado, cuidado e muito mimado!</p>
+      </div>
+    </div>
+  </section>
+
+  <!--CONTATO + RODAPE + REDES SOCIAIS-->
+
+  <section id="contato">
+    <h2>Contato</h2><br>
+
+    <p>Entre em contato com a gente pelas redes sociais ou pelos canais abaixo.</p>
+
+    <p>
+      Contato: 
+      <a href="mailto:contato@amorpatas.com">contato@amorpatas.com</a> | 
+      <a href="tel:+550000000000">(14) 99999-9999</a>
+    </p>
+  </section>
+
+  <footer>       
+    <h3>REDES SOCIAIS</h3>
+    <div class="icons">
+      <a href="https://www.facebook.com/?locale=pt_BR">
+        <img src="img/facebook-new.png" alt="Facebook">
+      </a>
+
+      <a href="https://www.instagram.com/">
+        <img src="img/instagram-new.png" alt="Instagram">
+      </a>
+
+      <a href="mailto:contato@amorpatas.com">
+        <img src="img/email.png" alt="E-mail">
+      </a>
+
+      <a href="https://www.whatsapp.com/?lang=pt_BR">
+        <img src="img/whatsapp.png" alt="whatsapp">
+      </a>
+    </div>
+    <p>
+      &copy; 2025 Amor Por Patas.<br>
+      Todos os direitos reservados.</p>
+    <p>Endereço: Av. Castro Alves, 62 - Somenzari, Marília - SP, 17506-000</p>
+ 
+  </footer>
+
+  <script>
+    function toggleMenu() {
+      var menu = document.getElementById("navLinks");
+      menu.classList.toggle("active");
+    }
+  </script>
+</body>
+</html>
